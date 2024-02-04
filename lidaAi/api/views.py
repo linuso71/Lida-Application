@@ -40,12 +40,3 @@ def visualization_question(request):
     except:
         print("this is  data" ,graph)
         return Response({"data":graph})
-
-
-@api_view(http_method_names=['POST'])
-def upload_file(request):
-    csv_file = request.data.get('file')
-    saved_file = save_uploaded_csv_file(csv_file)
-    summary = get_csv_summary(saved_file)
-    goals = get_goals(saved_file)
-    return Response({"data":goals})
