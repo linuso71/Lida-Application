@@ -6,7 +6,7 @@ from lida.datamodel import Goal
 from lida.utils import plot_raster
 import matplotlib
 
-lida1 = Manager(text_gen = llm("openai",api_key = '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'))
+lida1 = Manager(text_gen = llm("openai",api_key = openapikey))
 
 
 def save_uploaded_csv_file(file):
@@ -27,19 +27,19 @@ def save_uploaded_csv_file(file):
 
 def get_csv_summary(filename):
     
-    lida1 = Manager(text_gen = llm("openai",api_key = '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'))
+    lida1 = Manager(text_gen = llm("openai",api_key = openapikey))
     textgen_config = TextGenerationConfig(n=1,temperature=0.2,model='gpt-3.5-turbo',use_cache=True)
     summary = lida1.summarize(filename,textgen_config=textgen_config)
     return summary
 
 def get_goals(filename):
-    lida1 = Manager(text_gen = llm("openai",api_key = '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'))
+    lida1 = Manager(text_gen = llm("openai",api_key = openapikey))
     summary = get_csv_summary(filename)
     goals = lida1.goals(summary, n=5)
     return pd.DataFrame(goals)
 
 def get_visualization(filename,query):
-    lida1 = Manager(text_gen = llm("openai",api_key = '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'))
+    lida1 = Manager(text_gen = llm("openai",api_key = openapikey))
     textgen_config = TextGenerationConfig(n=1,temperature=0.2,model='gpt-3.5-turbo',use_cache=True)
     summary = lida1.summarize(filename,textgen_config=textgen_config)
     matplotlib.use('agg')
